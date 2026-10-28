@@ -1,0 +1,25 @@
+{
+  "upstream": "https://openrouter.ai/api/v1",
+  "openrouter_api_key": "YOUR_OPENROUTER_API_KEY_HERE",
+  "local_key": "GENERATED_SECRET_KEY_HERE",
+  "port": 4141,
+  "cooldown_seconds": 60,
+  "models": [
+    "openrouter/free",
+    "cohere/north-mini-code:free",
+    "nvidia/nemotron-3.5-lightning:free",
+    "poolside/laguna-s-2.1:free",
+    "poolside/laguna-xs-2.1:free",
+    "dots-studio/dots-3-note-preview:free",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "xingchen-agi/xing4.0-29b-a4b:free",
+    "google/gemma-4-31b-it:free",
+    "google/gemma-4-26b-a4b-it:free",
+    "recursive/flint-v1.0:free",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "liquid/lfm-2.5-2.6b:free",
+    "thinkingmachines/inkling:free",
+    "thinkingmachines/inkling-small:free"
+  ]
+}

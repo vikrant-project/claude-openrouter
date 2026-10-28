@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%">
+  <defs>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="url(#termBg)" rx="10"/>
+  <rect width="798" height="418" x="1" y="1" fill="none" stroke="#1e293b" rx="9"/>
+  
+  <!-- Header / Window Buttons -->
+  <rect width="800" height="36" fill="#0f172a" rx="10"/>
+  <circle cx="20" cy="18" r="6" fill="#ef4444"/>
+  <circle cx="38" cy="18" r="6" fill="#eab308"/>
+  <circle cx="56" cy="18" r="6" fill="#22c55e"/>
+  <text x="400" y="23" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">soulc@ubuntu: ~/project — claude-openrouter</text>
+
+  <!-- Terminal Content -->
+  <g font-family="monospace" font-size="12">
+    <text x="25" y="70" fill="#22c55e">soulc@ubuntu</text>
+    <text x="120" y="70" fill="#f8fafc">:</text>
+    <text x="130" y="70" fill="#38bdf8">~/project</text>
+    <text x="200" y="70" fill="#f8fafc">$ claude-openrouter --status</text>
+
+    <text x="25" y="105" fill="#38bdf8">================================================================================</text>
+    <text x="140" y="125" fill="#a855f7" font-weight="700">OPENROUTER FREE MODELS POOL STATUS &amp; AUTO-FAILOVER TRACKER</text>
+    <text x="25" y="145" fill="#38bdf8">================================================================================</text>
+
+    <text x="25" y="170" fill="#94a3b8">#   Model Name                                    Status       Success  Fail   Cooldown</text>
+    <text x="25" y="188" fill="#334155">--------------------------------------------------------------------------------</text>
+    
+    <text x="25" y="210" fill="#f8fafc">1   openrouter/free                               </text>
+    <text x="390" y="210" fill="#22c55e">ready        </text>
+    <text x="480" y="210" fill="#f8fafc">14       </text>
+    <text x="545" y="210" fill="#f8fafc">0      </text>
+    <text x="610" y="210" fill="#64748b">-</text>
+
+    <text x="25" y="235" fill="#f8fafc">2   cohere/north-mini-code:free                   </text>
+    <text x="390" y="235" fill="#22c55e">ready        </text>
+    <text x="480" y="235" fill="#f8fafc">8        </text>
+    <text x="545" y="235" fill="#f8fafc">0      </text>
+    <text x="610" y="235" fill="#64748b">-</text>
+
+    <text x="25" y="260" fill="#f8fafc">3   nvidia/nemotron-3.5-lightning:free            </text>
+    <text x="390" y="260" fill="#22c55e">ready        </text>
+    <text x="480" y="260" fill="#f8fafc">5        </text>
+    <text x="545" y="260" fill="#f8fafc">0      </text>
+    <text x="610" y="260" fill="#64748b">-</text>
+
+    <text x="25" y="285" fill="#f8fafc">4   poolside/laguna-s-2.1:free                    </text>
+    <text x="390" y="285" fill="#eab308">cooldown     </text>
+    <text x="480" y="285" fill="#f8fafc">2        </text>
+    <text x="545" y="285" fill="#ef4444">1      </text>
+    <text x="610" y="285" fill="#eab308">34.2s</text>
+
+    <text x="25" y="310" fill="#f8fafc">5   poolside/laguna-xs-2.1:free                   </text>
+    <text x="390" y="310" fill="#22c55e">ready        </text>
+    <text x="480" y="310" fill="#f8fafc">9        </text>
+    <text x="545" y="310" fill="#f8fafc">0      </text>
+    <text x="610" y="310" fill="#64748b">-</text>
+
+    <text x="25" y="335" fill="#38bdf8">================================================================================</text>
+    
+    <text x="25" y="365" fill="#22c55e">soulc@ubuntu</text>
+    <text x="120" y="365" fill="#f8fafc">:</text>
+    <text x="130" y="365" fill="#38bdf8">~/project</text>
+    <text x="200" y="365" fill="#f8fafc">$ claude "refactor auth logic"</text>
+    <text x="25" y="390" fill="#a855f7">╭─── Claude Code (AutoRouter: openrouter/free) ────────────────────────────────╮</text>
+  </g>
+</svg>

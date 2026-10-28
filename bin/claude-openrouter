@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+"""Unified launcher for Claude Code with OpenRouter Auto-Failover Bridge."""
+import fcntl
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.request
+from pathlib import Path
+
+root = Path.home() / ".claude"
+config_file = root / "openrouter-config.json"
+if not config_file.exists():
+    config_file = root / "emergent-config.json"
+
+if not config_file.exists():
+    sys.exit("[Error] No configuration found. Please run install.sh first.")
+
+c = json.loads(config_file.read_text())
+LOCAL_KEY = c.get("local_key", "")
+PORT = c.get("port", 4141)
+HEALTH_URL = f"http://127.0.0.1:{PORT}/health"
+STATUS_URL = f"http://127.0.0.1:{PORT}/status"
+
+def is_ready():
+    try:
+        req = urllib.request.Request(HEALTH_URL, headers={"Authorization": f"Bearer {LOCAL_KEY}"})
+        with urllib.request.urlopen(req, timeout=1.5) as resp:
+            data = json.load(resp)
+            return data.get("service") == "claude-openrouter-bridge"
+    except Exception:
+        return False
+
+args = sys.argv[1:]
+
+if "--status" in args:
+    if not is_ready():
+        print("[Claude OpenRouter] Bridge is not currently running.")
+        sys.exit(0)
+    try:
+        req = urllib.request.Request(STATUS_URL, headers={"Authorization": f"Bearer {LOCAL_KEY}"})
+        with urllib.request.urlopen(req, timeout=4) as resp:
+            data = json.load(resp)
+        print("=" * 80)
+        print("          OPENROUTER FREE MODELS POOL & FAILOVER HEALTH           ")
+        print("=" * 80)
+        print(f"{'#':<3} {'Model Name':<45} {'Status':<12} {'Success':<8} {'Fail':<6} {'Cooldown'}")
+        print("-" * 80)
+        for i, m in enumerate(data.get("pool", []), 1):
+            cd = f"{m['cooldown_remaining_sec']}s" if m.get("cooldown_remaining_sec", 0) > 0 else "-"
+            print(f"{i:<3} {m['model']:<45} {m['status']:<12} {m['success_count']:<8} {m['fail_count']:<6} {cd}")
+        print("=" * 80)
+    except Exception as e:
+        print("Error reading status:", e)
+    sys.exit(0)
+
+# Ensure bridge daemon is running
+with (root / "openrouter-start.lock").open("w") as lock:
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    if not is_ready():
+        log_file = root / "openrouter-proxy.log"
+        with log_file.open("a") as log:
+            bridge_script = root / "openrouter_bridge.py"
+            py_bin = root / "emergent-proxy/bin/python"
+            if not py_bin.exists():
+                py_bin = Path(sys.executable)
+            child = subprocess.Popen(
+                [str(py_bin), str(bridge_script)],
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=log,
+                start_new_session=True
+            )
+        for _ in range(60):
+            if is_ready():
+                break
+            if child.poll() is not None:
+                sys.exit(f"Bridge failed to boot. Check {log_file}")
+            time.sleep(0.3)
+        else:
+            sys.exit(f"Bridge boot timeout. Check {log_file}")
+
+# Locate real Claude Code binary
+binary = str(Path.home() / ".local/share/claude/versions/2.1.302")
+if not Path(binary).exists():
+    binary = str(Path.home() / ".local/bin/claude-original")
+if not Path(binary).exists():
+    binary = str(Path.home() / ".local/bin/claude")
+
+if not any(a == "--autocompact" or a.startswith("--autocompact=") for a in args):
+    args = ["--autocompact", "100k", *args]
+
+os.execv(binary, [binary, *args])
