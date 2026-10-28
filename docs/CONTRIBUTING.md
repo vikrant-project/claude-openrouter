@@ -11,7 +11,7 @@ We welcome contributions from the community!
 
 ### Development Setup
 ```bash
-git clone https://github.com/vikrant-project/public.git
+git clone https://github.com/vikrant-project/claude-openrouter.git
 cd public
 python3 -m venv venv
 source venv/bin/activate

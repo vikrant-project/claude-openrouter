@@ -8,7 +8,7 @@
 [![OpenRouter](https://img.shields.io/badge/OpenRouter-16+_Free_Models-6366f1?style=for-the-badge&logo=openai&logoColor=white)](https://openrouter.ai/)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-2.1.302-d97706?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.ai/code)
 [![Architecture: WSL2 / Linux](https://img.shields.io/badge/Platform-WSL2%20%7C%20Linux-059669?style=for-the-badge&logo=linux&logoColor=white)](https://ubuntu.com/)
-[![Failover: Auto](https://img.shields.io/badge/Failover-Zero--Downtime-ef4444?style=for-the-badge)](https://github.com/vikrant-project/public)
+[![Failover: Auto](https://img.shields.io/badge/Failover-Zero--Downtime-ef4444?style=for-the-badge)](https://github.com/vikrant-project/claude-openrouter)
 
 <br/>
 
@@ -42,13 +42,13 @@ No expensive Anthropic tokens required. Instant automatic failover between 16+ f
 Open your **Ubuntu / WSL2 terminal** and run:
 
 ```bash
-git clone https://github.com/vikrant-project/public.git && cd public
+git clone https://github.com/vikrant-project/claude-openrouter.git && cd claude-openrouter
 bash install.sh
 ```
 
 *(Or direct one-line curl installer)*:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/vikrant-project/public/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/vikrant-project/claude-openrouter/main/install.sh | bash
 ```
 
 The installer automatically sets up dependencies, configures your settings, and equips your terminal with the `claude` and `claude-openrouter` commands.
@@ -186,7 +186,7 @@ claude -p "Explain the auth flow in src/bridge.py"
 ## 🛠 Project Structure
 
 ```text
-vikrant-project/public
+vikrant-project/claude-openrouter
 ├── assets/
 │   ├── banner.jpg                    # Cyberpunk 16:9 visual banner
 │   ├── architecture_diagram.svg      # Component diagram
